@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ChatGroup{% endblock %}
+
+{% block body %}
+    <h1>Create new ChatGroup</h1>
+
+    {{ include('chat_group/_form.html.twig') }}
+
+    <a href="{{ path('app_chat_group_index') }}">back to list</a>
+{% endblock %}

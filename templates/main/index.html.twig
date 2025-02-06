@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ app.user.username }}! ✅</h1>
+    <a href="/logout">Cerrar sesion</a>
+
+    {# Lista de chatgroup #}
+    <div class="chatgroup-container">
+        <h1> Lista de grupos </h1>
+        {% for chatGroup in chatGroups %}
+            <div class="chatgroup">
+                <a href="/chat/group/{{ chatGroup.id }}">- {{ chatGroup.name }}</a>
+            </div>
+        {% endfor %}
+        {# Crear un grupo #}
+        <h1> Crear un grupo nuevo </h1>
+        <form action="/newGroup" method="POST">
+            <input type="text" name="name" placeholder="Escribe el nombre del grupo">
+            <button type="submit">Crear</button>
+        </form>
+    </div>
+
+    <style>
+        /* Estilos para el contenedor de mensajes */
+        .chatgroup-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para el título */
+        .chatgroup-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+    </style>
+
+
+
+
+</div>
+{% endblock %}

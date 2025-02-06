@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello chatGroup!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <a href="/main">Volver</a>  
+    {# Lista de mensajes #}
+    <div class="messages-container">
+        <h1> {{chatGroup.name}} </h1>
+        <a href="/chat/group/cerrarChat/{{ chatGroup.id }}">Dejar de participar en el chat</a>
+        <hr />
+        {% for message in messages %}
+            <div class="message">
+                <span class="username">{{ message.user.getUsername }}</span>: 
+                <span class="content">{{ message.content }}</span>
+                <span class="date">{{ message.date|date('d-m-Y H:i') }}</span>
+            </div>
+        {% endfor %}
+        <form action="/chat/group/newMessage" method="POST">
+            <input type="text" name="content" placeholder="Escribe un mensaje">
+            <input type="hidden" name="chatGroupId" value="{{ chatGroup.id }}">
+            <button type="submit">Enviar</button>
+        </form>
+        {# {% for message in messages %}
+            <div class="message">
+                <span class="username">{{ message.user.getUsername }}</span>: 
+                <span class="content">{{ message.content }}</span>
+                <span class="date">{{ message.date|date('d-m-Y H:i') }}</span>
+            </div>
+        {% endfor %}
+        <form action="/new" method="POST">
+            <input type="text" name="content" placeholder="Escribe un mensaje">
+            <button type="submit">Enviar</button>
+        </form> #}
+    </div>
+
+    <style>
+        /* Estilos para el contenedor de mensajes */
+        .messages-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para el título */
+        .messages-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Estilos para cada mensaje */
+        .message {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* Estilo para el nombre de usuario */
+        .username {
+            font-weight: bold;
+            color: #007BFF; 
+            font-size: 1rem;
+        }
+
+        /* Estilo para el contenido del mensaje */
+        .content {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        /* Estilo para la fecha */
+        .date {
+            font-size: 0.85rem;
+            color: #888; 
+        }
+    </style>
+
+
+
+
+</div>
+{% endblock %}
